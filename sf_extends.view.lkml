@@ -59,7 +59,7 @@ view: account {
 
     filters: {
       field: account.type
-      value: "\"Customer\""
+      value: "-Competitor"
     }
   }
 }

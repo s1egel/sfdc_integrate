@@ -229,7 +229,7 @@ view: opportunity {
   measure: total_revenue {
     type: sum
     sql: ${amount} ;;
-    value_format: "$#,##0"
+    value_format_name: big_money
   }
 
   measure: average_revenue_won {

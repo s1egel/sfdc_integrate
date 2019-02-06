@@ -3,6 +3,7 @@
 connection: "integrate_edw"
 
 include: "*.view"
+include: "*.dashboard"
 
 
 # views to explore——i.e., "base views" #
@@ -94,6 +95,34 @@ explore: opportunity {
   join: opportunity_owner {
     from: user
     sql_on: ${opportunity.owner_id} = ${opportunity_owner.id} ;;
+    relationship: many_to_one
+  }
+}
+
+explore: historical_snapshot {
+  label: "Historical Opportunity Snapshot"
+
+  join: opportunity {
+    view_label: "Current Opportunity State"
+    type: inner
+    relationship: many_to_one
+    sql_on: ${historical_snapshot.opportunity_id} = ${opportunity.id} ;;
+  }
+
+  join: account {
+    sql_on: ${opportunity.account_id} = ${account.id} ;;
+    relationship: many_to_one
+  }
+
+  join: opportunity_facts {
+    view_label: "Account"
+    sql_on: ${opportunity.account_id} = ${opportunity_facts.account_id} ;;
+    relationship: many_to_one
+  }
+
+  join: account_owner {
+    from: user
+    sql_on: ${account.owner_id} = ${account_owner.id} ;;
     relationship: many_to_one
   }
 }
